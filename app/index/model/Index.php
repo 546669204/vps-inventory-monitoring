@@ -87,22 +87,20 @@ class Index extends Model{
 
         
 		$this->allowField(true)->save($data);
-		if($this->id > 0){
-            return $this->success("添加成功",url("/"));
-        }else{
-            return $this->fail("添加失败",url("/"));
-        }
+      	return $this->id;
     }
     public function test(){
         $list = $this->where(["status"=>1])->select();
         $r = [];
+      	$log = Model('Log');
+      	$index =  Model('Index');
         foreach ($list as $value){
             $str = $this->go_curl($value["vurl"],"get");
             $a = eval($value["vf"]);
             $r[] = "{$value['name']} --- " . (($a) ? 'true' : 'false');
             if ($a != $value["stock"]){
-                Model('Index')->save(["stock"=>$a],["id"=>$value["id"]]);
-                Model('Log')->isUpdate(false)->save(["status"=>$a,"indexid"=>$value["id"]]);
+                $index->save(["stock"=>$a],["id"=>$value["id"]]);
+                $log->isUpdate(false)->save(["status"=>$a,"indexid"=>$value["id"]]);
             }
         }
         return "<pre>" . join($r,"\n") . "\nOK" . "</pre>";

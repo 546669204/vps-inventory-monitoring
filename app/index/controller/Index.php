@@ -19,7 +19,11 @@ class Index extends Controller
     }
     public function savedata(){
         $data = input('post.');
-        return model('Index')->saveData( $data );
+      	if(model('Index')->saveData( $data ) > 0){
+            return $this->success("添加成功",url("/"));
+        }else{
+            return $this->fail("添加失败",url("/"));
+        }
     }
     public function test(){
         return Model("Index")->test();
