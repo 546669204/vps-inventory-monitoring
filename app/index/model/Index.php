@@ -110,7 +110,7 @@ class Index extends Model{
             if ($value["stock"] == false && $a == true){
                 $p = $user->where("find_in_set({$value['id']},subscribe)")->select();
                 $title = "您关注的{$value['name']}有货啦。";
-                $content = "您关注的{$value['name']}有货啦。\n快来大肆抢购呀。\n测评地址：$host/ceping?{$value['id']}\n购买地址：$host/buy?{$value['id']}";
+                $content = "您关注的{$value['name']}有货啦。\n快来大肆抢购呀。\n测评地址：$host/ceping/{$value['id']}\n购买地址：$host/buy/{$value['id']}";
                 foreach ($p as $k => $v) {
                     if ($v["ftsckey"] != ""){
                         $this->go_curl("https://sc.ftqq.com/{$v['ftsckey']}.send","post", ["text"=>$title,"desp"=>$content]);

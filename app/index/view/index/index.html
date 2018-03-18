@@ -151,13 +151,13 @@
             return value==0?'缺货':'有货';
         }
         function buy(value,row,index){
-            return "<a href='buy?"+row.id+"'>购买链接</a>";
+            return "<a href='buy/"+row.id+"'>购买链接</a>";
         }
         function ceping(value,row,index){
-            return "<a href='ceping?"+row.id+"'>介绍&测评</a>";
+            return "<a href='ceping/"+row.id+"'>介绍&测评</a>";
         }
         function company(value,row,index){
-            return "<a href='company?"+row.companyid+"'>"+row.companyname+"</a>";
+            return "<a href='company/"+row.companyid+"'>"+row.companyname+"</a>";
         }
         function subscribe(value,row,index){
             var dingstr = "{$user.subscribe??''}";
