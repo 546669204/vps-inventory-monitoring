@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.4.15.10
--- https://www.phpmyadmin.net
+-- version 4.7.6
+-- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: 2018-03-16 09:03:09
--- 服务器版本： 5.5.59-log
--- PHP Version: 5.6.33
+-- Generation Time: 2018-03-18 20:14:20
+-- 服务器版本： 5.5.58-log
+-- PHP Version: 5.6.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -26,14 +28,14 @@ SET time_zone = "+00:00";
 -- 表的结构 `xm_company`
 --
 
-CREATE TABLE IF NOT EXISTS `xm_company` (
+CREATE TABLE `xm_company` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `url` varchar(255) NOT NULL,
   `create_time` int(11) DEFAULT NULL,
   `update_time` int(11) DEFAULT NULL,
   `delete_time` int(11) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- 转存表中的数据 `xm_company`
@@ -49,19 +51,19 @@ INSERT INTO `xm_company` (`id`, `name`, `url`, `create_time`, `update_time`, `de
 -- 表的结构 `xm_index`
 --
 
-CREATE TABLE IF NOT EXISTS `xm_index` (
-  `id` int(10) unsigned NOT NULL,
-  `companyid` int(10) unsigned DEFAULT NULL,
-  `placeid` int(10) unsigned DEFAULT NULL,
+CREATE TABLE `xm_index` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `companyid` int(10) UNSIGNED DEFAULT NULL,
+  `placeid` int(10) UNSIGNED DEFAULT NULL,
   `ram` varchar(255) DEFAULT NULL,
   `disk` text,
-  `cpu` smallint(5) unsigned DEFAULT NULL,
-  `ip4` smallint(5) unsigned DEFAULT NULL,
-  `ip6` smallint(5) unsigned DEFAULT NULL,
+  `cpu` smallint(5) UNSIGNED DEFAULT NULL,
+  `ip4` smallint(5) UNSIGNED DEFAULT NULL,
+  `ip6` smallint(5) UNSIGNED DEFAULT NULL,
   `frame` varchar(25) DEFAULT NULL,
   `flow` varchar(150) DEFAULT NULL,
-  `bandwidth` smallint(5) unsigned DEFAULT NULL,
-  `stock` tinyint(3) unsigned DEFAULT NULL,
+  `bandwidth` smallint(5) UNSIGNED DEFAULT NULL,
+  `stock` tinyint(3) UNSIGNED DEFAULT NULL,
   `remark` text,
   `buy` text,
   `monthly` varchar(55) DEFAULT NULL,
@@ -72,20 +74,22 @@ CREATE TABLE IF NOT EXISTS `xm_index` (
   `name` varchar(255) NOT NULL,
   `vurl` varchar(255) NOT NULL,
   `vf` text NOT NULL,
-  `status` tinyint(3) unsigned DEFAULT '0'
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+  `status` tinyint(3) UNSIGNED DEFAULT '0',
+  `route` varchar(255) NOT NULL,
+  `ceping` varchar(1024) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- 转存表中的数据 `xm_index`
 --
 
-INSERT INTO `xm_index` (`id`, `companyid`, `placeid`, `ram`, `disk`, `cpu`, `ip4`, `ip6`, `frame`, `flow`, `bandwidth`, `stock`, `remark`, `buy`, `monthly`, `yearly`, `create_time`, `update_time`, `delete_time`, `name`, `vurl`, `vf`, `status`) VALUES
-(1, 1, 1, '768MB', '15GB', 2, 1, 0, 'KVM', '500GB 单向', 40, 0, '', 'https://idc.panel.h2y.co/cart.php?a=add&pid=26', '￥49', '', 1512637883, 1521161463, NULL, 'MineCloud HK Pacnet A1', 'https://idc.panel.h2y.co/cart.php?a=add&pid=26', 'if(strpos($str,"缺貨中")>=0){\nreturn false;\n}\nreturn true;', 1),
-(2, 1, 1, '1024MB', '30GB', 2, 1, 0, 'KVM', '600GB 单向', 60, 0, '', 'https://idc.panel.h2y.co/cart.php?a=add&pid=27', '￥79', '', 1512637883, 1521161433, NULL, 'MineCloud HK Pacnet A2', 'https://idc.panel.h2y.co/cart.php?a=add&pid=27', 'if(strpos($str,"缺貨中")>=0){\nreturn false;\n}\nreturn true;', 1),
-(3, 1, 1, '2048MB', '60GB', 2, 1, 0, 'KVM', '1TB 单向', 100, 0, '', 'https://idc.panel.h2y.co/cart.php?a=add&pid=13', '￥159', '', 1512637883, 1521161474, NULL, 'MineCloud HK Pacnet B1', 'https://idc.panel.h2y.co/cart.php?a=add&pid=13', 'if(strpos($str,"缺貨中")>=0){\nreturn false;\n}\nreturn true;', 1),
-(4, 1, 1, '4GB', '120GB', 4, 1, 0, 'KVM', '1.5TB 单向', 100, 0, '', 'https://idc.panel.h2y.co/cart.php?a=add&pid=14', '￥319', '', 1512637883, 1521161513, NULL, 'MineCloud HK Pacnet B2', 'https://idc.panel.h2y.co/cart.php?a=add&pid=14', 'if(strpos($str,"缺貨中")>=0){\nreturn false;\n}\nreturn true;', 1),
-(5, 1, 1, '8GB', '250GB', 8, 1, 0, 'KVM', '2TB 单向', 100, 0, '', 'https://idc.panel.h2y.co/cart.php?a=add&pid=15', '￥639', '', 1512637883, 1521161642, NULL, 'MineCloud HK Pacnet C1', 'https://idc.panel.h2y.co/cart.php?a=add&pid=15', 'if(strpos($str,"缺貨中")>=0){\nreturn false;\n}\nreturn true;', 1),
-(6, 1, 1, '16GB', '500GB', 16, 1, 0, 'KVM', '4TB 单向', 100, 0, '', 'https://idc.panel.h2y.co/cart.php?a=add&pid=16', '￥1299', '', 1512637883, 1521161823, NULL, 'MineCloud HK Pacnet C2', 'https://idc.panel.h2y.co/cart.php?a=add&pid=16', 'if(strpos($str,"缺貨中")>=0){\nreturn false;\n}\nreturn true;', 1);
+INSERT INTO `xm_index` (`id`, `companyid`, `placeid`, `ram`, `disk`, `cpu`, `ip4`, `ip6`, `frame`, `flow`, `bandwidth`, `stock`, `remark`, `buy`, `monthly`, `yearly`, `create_time`, `update_time`, `delete_time`, `name`, `vurl`, `vf`, `status`, `route`, `ceping`) VALUES
+(1, 1, 1, '768MB', '15GB', 2, 1, 0, 'KVM', '500GB 单向', 40, 0, '', 'https://idc.panel.h2y.co/cart.php?a=add&pid=26', '￥49', '', 1512637883, 1521161463, NULL, 'MineCloud HK Pacnet A1', 'https://idc.panel.h2y.co/cart.php?a=add&pid=26', 'if(strpos($str,\"缺貨中\")>=0){\nreturn false;\n}\nreturn true;', 1, '', ''),
+(2, 1, 1, '1024MB', '30GB', 2, 1, 0, 'KVM', '600GB 单向', 60, 0, '', 'https://idc.panel.h2y.co/cart.php?a=add&pid=27', '￥79', '', 1512637883, 1521161433, NULL, 'MineCloud HK Pacnet A2', 'https://idc.panel.h2y.co/cart.php?a=add&pid=27', 'if(strpos($str,\"缺貨中\")>=0){\nreturn false;\n}\nreturn true;', 1, '', ''),
+(3, 1, 1, '2048MB', '60GB', 2, 1, 0, 'KVM', '1TB 单向', 100, 0, '', 'https://idc.panel.h2y.co/cart.php?a=add&pid=13', '￥159', '', 1512637883, 1521161474, NULL, 'MineCloud HK Pacnet B1', 'https://idc.panel.h2y.co/cart.php?a=add&pid=13', 'if(strpos($str,\"缺貨中\")>=0){\nreturn false;\n}\nreturn true;', 1, '', ''),
+(4, 1, 1, '4GB', '120GB', 4, 1, 0, 'KVM', '1.5TB 单向', 100, 0, '', 'https://idc.panel.h2y.co/cart.php?a=add&pid=14', '￥319', '', 1512637883, 1521161513, NULL, 'MineCloud HK Pacnet B2', 'https://idc.panel.h2y.co/cart.php?a=add&pid=14', 'if(strpos($str,\"缺貨中\")>=0){\nreturn false;\n}\nreturn true;', 1, '', ''),
+(5, 1, 1, '8GB', '250GB', 8, 1, 0, 'KVM', '2TB 单向', 100, 0, '', 'https://idc.panel.h2y.co/cart.php?a=add&pid=15', '￥639', '', 1512637883, 1521161642, NULL, 'MineCloud HK Pacnet C1', 'https://idc.panel.h2y.co/cart.php?a=add&pid=15', 'if(strpos($str,\"缺貨中\")>=0){\nreturn false;\n}\nreturn true;', 1, '', ''),
+(6, 1, 1, '16GB', '500GB', 16, 1, 0, 'KVM', '4TB 单向', 100, 1, '', 'https://idc.panel.h2y.co/cart.php?a=add&pid=16', '￥1299', '', 1512637883, 1521375054, NULL, 'MineCloud HK Pacnet C2', 'https://idc.panel.h2y.co/cart.php?a=add&pid=96', 'if(strpos($str,\"缺貨中\")!==false){\r\nreturn false;\r\n}\r\nreturn true;', 1, '', '');
 
 -- --------------------------------------------------------
 
@@ -93,14 +97,14 @@ INSERT INTO `xm_index` (`id`, `companyid`, `placeid`, `ram`, `disk`, `cpu`, `ip4
 -- 表的结构 `xm_log`
 --
 
-CREATE TABLE IF NOT EXISTS `xm_log` (
-  `id` int(10) unsigned NOT NULL,
-  `indexid` int(10) unsigned DEFAULT '0',
+CREATE TABLE `xm_log` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `indexid` int(10) UNSIGNED DEFAULT '0',
   `status` tinyint(1) NOT NULL DEFAULT '0',
   `create_time` int(11) DEFAULT NULL,
   `update_time` int(11) DEFAULT NULL,
   `delete_time` int(11) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=193 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- 转存表中的数据 `xm_log`
@@ -298,7 +302,12 @@ INSERT INTO `xm_log` (`id`, `indexid`, `status`, `create_time`, `update_time`, `
 (189, 3, 0, 1521161474, 1521161474, NULL),
 (190, 4, 0, 1521161513, 1521161513, NULL),
 (191, 5, 0, 1521161642, 1521161642, NULL),
-(192, 6, 0, 1521161823, 1521161823, NULL);
+(192, 6, 0, 1521161823, 1521161823, NULL),
+(193, 6, 1, 1521373658, 1521373658, NULL),
+(194, 6, 1, 1521373776, 1521373776, NULL),
+(195, 6, 1, 1521373947, 1521373947, NULL),
+(196, 6, 1, 1521373987, 1521373987, NULL),
+(197, 6, 1, 1521375054, 1521375054, NULL);
 
 -- --------------------------------------------------------
 
@@ -306,13 +315,13 @@ INSERT INTO `xm_log` (`id`, `indexid`, `status`, `create_time`, `update_time`, `
 -- 表的结构 `xm_place`
 --
 
-CREATE TABLE IF NOT EXISTS `xm_place` (
+CREATE TABLE `xm_place` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `create_time` int(11) DEFAULT NULL,
   `update_time` int(11) DEFAULT NULL,
   `delete_time` int(11) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- 转存表中的数据 `xm_place`
@@ -321,6 +330,30 @@ CREATE TABLE IF NOT EXISTS `xm_place` (
 INSERT INTO `xm_place` (`id`, `name`, `create_time`, `update_time`, `delete_time`) VALUES
 (1, 'HK Pacnet', 1512637883, 1512637883, NULL),
 (2, 'china', 1521160775, 1521160775, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `xm_user`
+--
+
+CREATE TABLE `xm_user` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `user` varchar(64) NOT NULL,
+  `pass` varchar(32) NOT NULL,
+  `ftsckey` varchar(256) NOT NULL,
+  `subscribe` text NOT NULL,
+  `create_time` int(10) UNSIGNED DEFAULT NULL,
+  `update_time` int(10) UNSIGNED DEFAULT NULL,
+  `delete_time` int(10) UNSIGNED DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- 转存表中的数据 `xm_user`
+--
+
+INSERT INTO `xm_user` (`id`, `user`, `pass`, `ftsckey`, `subscribe`, `create_time`, `update_time`, `delete_time`) VALUES
+(1, '546669204', '97304531204ef7431330c20427d95481', 'SCU16540Te03d436ae52c339f82764f1022f0d1975aae4d3ff0335', ',4,5,3,6', 1521268713, 1521373746, NULL);
 
 --
 -- Indexes for dumped tables
@@ -351,29 +384,46 @@ ALTER TABLE `xm_place`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- Indexes for table `xm_user`
+--
+ALTER TABLE `xm_user`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- 在导出的表使用AUTO_INCREMENT
 --
 
 --
--- AUTO_INCREMENT for table `xm_company`
+-- 使用表AUTO_INCREMENT `xm_company`
 --
 ALTER TABLE `xm_company`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
 --
--- AUTO_INCREMENT for table `xm_index`
+-- 使用表AUTO_INCREMENT `xm_index`
 --
 ALTER TABLE `xm_index`
-  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
 --
--- AUTO_INCREMENT for table `xm_log`
+-- 使用表AUTO_INCREMENT `xm_log`
 --
 ALTER TABLE `xm_log`
-  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=193;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=198;
+
 --
--- AUTO_INCREMENT for table `xm_place`
+-- 使用表AUTO_INCREMENT `xm_place`
 --
 ALTER TABLE `xm_place`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- 使用表AUTO_INCREMENT `xm_user`
+--
+ALTER TABLE `xm_user`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

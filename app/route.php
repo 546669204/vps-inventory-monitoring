@@ -12,10 +12,14 @@
 return [
     '__pattern__' => [
         'name' => '\w+',
+        'id'    => '\d+',
     ],
     '[hello]'     => [
         ':id'   => ['index/hello', ['method' => 'get'], ['id' => '\d+']],
         ':name' => ['index/hello', ['method' => 'post']],
     ],
+    'buy/:id' => 'index/go/buy',
+    'ceping/:id' => 'index/go/ceping',
+    'company/:id' => 'index/go/company',
 
 ];

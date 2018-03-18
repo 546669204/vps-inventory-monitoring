@@ -84,7 +84,9 @@ class Index extends Model{
 			$data["placeid"]=$place["id"];
         }
 
-
+        if (config("app.addpass")){
+            $data["status"] = 1;
+        }
         
 		$this->allowField(true)->save($data);
       	return $this->id;
@@ -94,6 +96,9 @@ class Index extends Model{
         $r = [];
       	$log = Model('Log');
       	$index =  Model('Index');
+        $user = Model("User");
+        $request = request();
+        $host = $request->domain();
         foreach ($list as $value){
             $str = $this->go_curl($value["vurl"],"get");
             $a = eval($value["vf"]);
@@ -101,6 +106,17 @@ class Index extends Model{
             if ($a != $value["stock"]){
                 $index->save(["stock"=>$a],["id"=>$value["id"]]);
                 $log->isUpdate(false)->save(["status"=>$a,"indexid"=>$value["id"]]);
+            }
+            if ($value["stock"] == false && $a == true){
+                $p = $user->where("find_in_set({$value['id']},subscribe)")->select();
+                $title = "您关注的{$value['name']}有货啦。";
+                $content = "您关注的{$value['name']}有货啦。\n快来大肆抢购呀。\n测评地址：$host/ceping?{$value['id']}\n购买地址：$host/buy?{$value['id']}";
+                foreach ($p as $k => $v) {
+                    if ($v["ftsckey"] != ""){
+                        $this->go_curl("https://sc.ftqq.com/{$v['ftsckey']}.send","post", ["text"=>$title,"desp"=>$content]);
+                    }
+                }
+
             }
         }
         return "<pre>" . join($r,"\n") . "\nOK" . "</pre>";
