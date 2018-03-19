@@ -153,6 +153,10 @@ class Index extends Model{
         $option[CURLOPT_MAXREDIRS]      = 4;
         $option[CURLOPT_RETURNTRANSFER] = TRUE;
         $option[CURLOPT_TIMEOUT]        = $timeout;
+        $option[CURLOPT_MAXREDIRS]        = 5;   
+        $option[CURLOPT_COOKIEFILE]        = TEMP_PATH.'cookie.txt';   
+        $option[CURLOPT_COOKIEJAR]        = TEMP_PATH.'cookie.txt';   
+        
         //设置证书信息
         if(!empty($cert_info) && !empty($cert_info['cert_file'])) {
             $option[CURLOPT_SSLCERT]       = $cert_info['cert_file'];
