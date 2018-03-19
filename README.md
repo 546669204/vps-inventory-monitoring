@@ -31,7 +31,7 @@
 3.添加权限管理         ==> app/index/config.php    
 
 4.设置后台运行验证程序  ==> 
->screen vpstest  //创建screen
+>screen vpstest  //创建screen  
 cd [网站根目录]  
 php think VpsTest  
 CTRL  D //退出screen  
