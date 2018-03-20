@@ -31,10 +31,10 @@
 3.添加权限管理         ==> app/index/config.php    
 
 4.设置后台运行验证程序  ==> 
->screen vpstest  //创建screen  
+>screen -S vpstest  //创建screen  
 cd [网站根目录]  
 php think VpsTest  
-CTRL  D //退出screen  
+CTRL A D //退出screen  
 然后关闭ssh即可
 重新进入查看可使用  
 screen -r vpstest
