@@ -12,32 +12,36 @@
     <script src="https://cdn.bootcss.com/bootstrap-table/1.11.1/bootstrap-table.min.js"></script>
     <link href="https://cdn.bootcss.com/bootstrap-table/1.11.1/bootstrap-table.min.css" rel="stylesheet">
     <script type="text/javascript" src="https://cdn.bootcss.com/bootstrap-table/1.11.1/extensions/filter-control/bootstrap-table-filter-control.min.js"></script>
-
+	<script src="https://cdn.bootcss.com/bootstrap-table/1.12.1/locale/bootstrap-table-zh-CN.min.js"></script>
 </head>
 <body>
 
     
     <div class="container-fluid">
         <div class="row">
-            <div class="col-sm-10">
-                <h1 class="inline-block">VPS库存监控系统</h1><span>实时把握库存信息</span>
-                <a href="/index/index/edit">点击添加</a>
+            <div class="col-sm-12 text-center">
+                <h1 class="inline-block"> <span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star-empty"></span><span class="glyphicon glyphicon-star"></span> VPS库存监控系统 <span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star-empty"></span><span class="glyphicon glyphicon-star"></span></h1><span>实时把握库存信息</span>
+               
             </div>
-            <div class="col-sm-2 text-right">
-                {if condition="$islogin"}
-                <a onclick="useredit()">个人信息</a>|<a onclick="loginout()">退出登录</a>
-                {else/}
-                <a onclick="useredit()">注册用户</a>|<a onclick="loginshow()">账户登录</a>
-                {/if}
-            </div>
+
         </div>
     </div>
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-12">
+				<div id="toolbar" class="btn-group">
+					<a class="btn btn-success btn-sm" aria-hidden="true" href="/index/index/edit"> <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>    添加监控</a>
+					{if condition="$islogin"}
+					<a onclick="useredit()" class="btn btn-info btn-sm" role="button"> <span class="glyphicon glyphicon-user" aria-hidden="true"></span>    个人信息</a>
+					<a onclick="loginout()" class="btn btn-warning btn-sm" role="button"> <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>    退出登录</a>
+					{else/}
+					<a onclick="useredit()" class="btn btn-info btn-sm" role="button"> <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>    注册用户</a>
+					<a onclick="loginshow()" class="btn btn-primary btn-sm" role="button"> <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>    账户登录</a>
+					{/if}
+				</div>
                 <table id="table"
                     data-toolbar="#toolbar"
-                    data-search="true"
+                    data-search="false"
                     data-show-refresh="true"
                     data-show-toggle="true"
                     data-show-columns="true"
@@ -54,7 +58,7 @@
                     data-url="{:url('index/index/getList?')}"
                     data-filter-control="true"
                     data-filter-show-clear="true"
-                    
+                    class="table table-striped table-condensed"
                 >
                     <thead>
                         <tr>
@@ -95,11 +99,11 @@
                 <input type="hidden" name="id" value="{$user.id??0}">
                 <div class="form-group">
                 <label for="user">帐号:</label>
-                    <input type="text" class="form-control" id="user" name="user" placeholder="用户名" value="{$user.user??''}" {$islogin?"disabled":""}>
+                    <input type="text" class="form-control"  name="user" placeholder="用户名" value="{$user.user??''}" {$islogin?"disabled":""}>
                 </div>
                 <div class="form-group">
                     <label for="pass">密码:</label>
-                    <input type="password" class="form-control" id="pass" name="pass" placeholder="密码" value="">
+                    <input type="password" class="form-control" name="pass" placeholder="密码" value="">
                 </div>
                 <div class="form-group">
                     <label for="ftsckey">ftsckey</label>
@@ -109,8 +113,8 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                <button type="button" class="btn btn-primary" onclick="usersavedata()">保存</button>
+                <button type="button" class="btn btn-default btn-danger" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary btn-success" onclick="usersavedata()">保存</button>
             </div>
         </div>
     </div>
@@ -126,35 +130,37 @@
                 <form>
                     <div class="form-group">
                     <label for="user">帐号:</label>
-                        <input type="text" class="form-control" id="user" name="user" placeholder="用户名">
+                        <input type="text" class="form-control" name="user" placeholder="用户名">
                     </div>
                     <div class="form-group">
                         <label for="pass">密码:</label>
-                        <input type="password" class="form-control" id="pass" name="pass" placeholder="密码">
+                        <input type="password" class="form-control"  name="pass" placeholder="密码">
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                <button type="button" class="btn btn-primary" onclick="loginpost()">登录</button>
+                <button type="button" class="btn btn-default btn-danger" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary btn-success" onclick="loginpost()">登录</button>
             </div>
         </div>
     </div>
 </div>
-
+<style>
+#table td{vertical-align:middle;text-align:center;}
+</style>
     <script>
 
         function bandwidth(value,row,index){
             return value + "M";
         }
         function stock(value,row,index){
-            return value==0?'缺货':'有货';
+            return value==0?'<p class="btn btn-danger btn-sm">缺货</p>':'<p class="btn btn-success btn-sm">有货</p>';
         }
         function buy(value,row,index){
-            return "<a href='buy/"+row.id+"'>购买链接</a>";
+            return "<a href='buy/"+row.id+"' class='btn btn-primary btn-sm'>购买链接</a>";
         }
         function ceping(value,row,index){
-            return "<a href='ceping/"+row.id+"'>介绍&测评</a>";
+            return "<a href='ceping/"+row.id+"' class='btn btn-info btn-sm'>介绍&测评</a>";
         }
         function company(value,row,index){
             return "<a href='company/"+row.companyid+"'>"+row.companyname+"</a>";
@@ -164,11 +170,11 @@
             if (dingstr != ""){
                 var ding = dingstr.split(",");
                 if ($.inArray(""+row.id,ding) != -1){
-                    return "<span>已订阅</span>";
+                    return "<span class='btn btn-success btn-sm'>已订阅</span>";
                 }
-                return "<span>未订阅</span>";
+                return "<span class='btn btn-danger btn-sm'>未订阅</span>";
             }
-            return "<span>未订阅</span>";
+            return "<span class='btn btn-danger btn-sm'>未订阅</span>";
         }
         window.subscribeevent = {
             'click span': function (e, value, row, index) {
@@ -245,6 +251,28 @@
             })
             
         }
+		
+		$(document).ready(function(){
+			$("#table th").each(function(){
+				if ($(this).find(".fht-cell select").length>0){	
+					$width = $(this).width();
+					$(this).find(".fht-cell select option").eq(0).html($(this).find(".th-inner").html());
+					$(this).find(".th-inner").remove();
+					$(this).css({verticalAlign:"top",paddingTop:"8px"});
+					//$(this).find("select").width($width);
+				}
+				if ($(this).find(".fht-cell input").length>0){	
+					$width = $(this).width();
+					$(this).find(".fht-cell input").attr("placeholder",$(this).find(".th-inner").html());
+					$(this).find(".th-inner").remove();
+					$(this).css({verticalAlign:"top",paddingTop:"8px"});
+					//$(this).find("input").width($width);
+				}
+				if ($(this).find(".fht-cell>div").length>0 && $(this).find(".fht-cell>div").html() == ""){	
+					$(this).find(".fht-cell").remove();
+				}
+			});
+		});
     </script>
 </body>
 </html>
