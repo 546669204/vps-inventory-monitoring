@@ -43,6 +43,9 @@ class VpsTest extends Command{
                         if ($v["ftsckey"] != ""){
                             go_curl("https://sc.ftqq.com/{$v['ftsckey']}.send","post", ["text"=>$title,"desp"=>$content]);
                         }
+                        if ($v["tgsckey"] != ""){
+                            go_curl("https://cloud.hcaiyue.top/tgbot.php","post", ["method"=>"send","content"=>$content,"sckey"=>$v["tgsckey"]]);
+                        }
                     }
                 }
                 sleep(5);
