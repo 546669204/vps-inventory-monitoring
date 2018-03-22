@@ -7,7 +7,11 @@ class Index extends Controller
     public function index(){
         if (session('?user')){
             $this->assign("islogin",true);
-            $this->assign("user",session('user'));
+            $data = session('user');
+            $u = Model("User")->where(["user"=>$data["user"]])->find();
+            if ($u != null){
+                $this->assign("user",$u);
+            }
         }else{
             $this->assign("islogin",false);
         }

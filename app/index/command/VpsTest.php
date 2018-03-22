@@ -33,7 +33,7 @@ class VpsTest extends Command{
                 $r[] = "{$value['name']} --- " . (($a) ? 'true' : 'false');
                 if ($a != $value["stock"]){
                     $index->save(["stock"=>$a],["id"=>$value["id"]]);
-                    $log->isUpdate(false)->save(["status"=>$a,"indexid"=>$value["id"]]);
+                    $log->data(["status"=>$a,"indexid"=>$value["id"]])->isUpdate(false)->save();
                 }
                 if ($value["stock"] == false && $a == true){
                     $p = $user->where("find_in_set({$value['id']},subscribe)")->select();
