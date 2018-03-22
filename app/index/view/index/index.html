@@ -158,10 +158,16 @@
             return value==0?'<p class="btn btn-danger btn-sm">缺货</p>':'<p class="btn btn-success btn-sm">有货</p>';
         }
         function buy(value,row,index){
-            return "<a href='buy/"+row.id+"' class='btn btn-primary btn-sm'>购买链接</a>";
+			if (row.buy != null && row.buy != ""){
+				return "<a href='buy/"+row.id+"' class='btn btn-primary btn-sm'>购买链接</a>";
+			}
+            return "<a class='btn btn-primary btn-sm'>暂无购链</a>";
         }
         function ceping(value,row,index){
-            return "<a href='ceping/"+row.id+"' class='btn btn-info btn-sm'>介绍&测评</a>";
+			if (row.ceping != null && row.ceping != ""){
+				return "<a href='ceping/"+row.id+"' class='btn btn-info btn-sm'>介绍&测评</a>";
+			}
+            return "<a class='btn btn-info btn-sm'>暂无测评</a>";
         }
         function company(value,row,index){
             return "<a href='company/"+row.companyid+"'>"+row.companyname+"</a>";
