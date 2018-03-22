@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: 2018-03-18 20:14:20
+-- Generation Time: 2018-03-21 22:17:42
 -- 服务器版本： 5.5.58-log
 -- PHP Version: 5.6.30
 
@@ -43,7 +43,10 @@ CREATE TABLE `xm_company` (
 
 INSERT INTO `xm_company` (`id`, `name`, `url`, `create_time`, `update_time`, `delete_time`) VALUES
 (1, 'MineCloud', '', 1512637526, 1512637526, NULL),
-(2, 'test', '', 1521160775, 1521160775, NULL);
+(2, 'test', '', 1521160775, 1521160775, NULL),
+(3, '搬瓦工', '', 1521206330, 1521206330, NULL),
+(4, 'DGCHost', '', 1521262192, 1521262192, NULL),
+(5, 'LightCloud', '', 1521382370, 1521382370, NULL);
 
 -- --------------------------------------------------------
 
@@ -63,7 +66,7 @@ CREATE TABLE `xm_index` (
   `frame` varchar(25) DEFAULT NULL,
   `flow` varchar(150) DEFAULT NULL,
   `bandwidth` smallint(5) UNSIGNED DEFAULT NULL,
-  `stock` tinyint(3) UNSIGNED DEFAULT NULL,
+  `stock` tinyint(1) DEFAULT '1',
   `remark` text,
   `buy` text,
   `monthly` varchar(55) DEFAULT NULL,
@@ -74,7 +77,7 @@ CREATE TABLE `xm_index` (
   `name` varchar(255) NOT NULL,
   `vurl` varchar(255) NOT NULL,
   `vf` text NOT NULL,
-  `status` tinyint(3) UNSIGNED DEFAULT '0',
+  `status` tinyint(3) UNSIGNED DEFAULT '1',
   `route` varchar(255) NOT NULL,
   `ceping` varchar(1024) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -89,7 +92,18 @@ INSERT INTO `xm_index` (`id`, `companyid`, `placeid`, `ram`, `disk`, `cpu`, `ip4
 (3, 1, 1, '2048MB', '60GB', 2, 1, 0, 'KVM', '1TB 单向', 100, 0, '', 'https://idc.panel.h2y.co/cart.php?a=add&pid=13', '￥159', '', 1512637883, 1521161474, NULL, 'MineCloud HK Pacnet B1', 'https://idc.panel.h2y.co/cart.php?a=add&pid=13', 'if(strpos($str,\"缺貨中\")>=0){\nreturn false;\n}\nreturn true;', 1, '', ''),
 (4, 1, 1, '4GB', '120GB', 4, 1, 0, 'KVM', '1.5TB 单向', 100, 0, '', 'https://idc.panel.h2y.co/cart.php?a=add&pid=14', '￥319', '', 1512637883, 1521161513, NULL, 'MineCloud HK Pacnet B2', 'https://idc.panel.h2y.co/cart.php?a=add&pid=14', 'if(strpos($str,\"缺貨中\")>=0){\nreturn false;\n}\nreturn true;', 1, '', ''),
 (5, 1, 1, '8GB', '250GB', 8, 1, 0, 'KVM', '2TB 单向', 100, 0, '', 'https://idc.panel.h2y.co/cart.php?a=add&pid=15', '￥639', '', 1512637883, 1521161642, NULL, 'MineCloud HK Pacnet C1', 'https://idc.panel.h2y.co/cart.php?a=add&pid=15', 'if(strpos($str,\"缺貨中\")>=0){\nreturn false;\n}\nreturn true;', 1, '', ''),
-(6, 1, 1, '16GB', '500GB', 16, 1, 0, 'KVM', '4TB 单向', 100, 1, '', 'https://idc.panel.h2y.co/cart.php?a=add&pid=16', '￥1299', '', 1512637883, 1521375054, NULL, 'MineCloud HK Pacnet C2', 'https://idc.panel.h2y.co/cart.php?a=add&pid=96', 'if(strpos($str,\"缺貨中\")!==false){\r\nreturn false;\r\n}\r\nreturn true;', 1, '', '');
+(6, 1, 1, '16GB', '500GB', 16, 1, 0, 'KVM', '4TB 单向', 100, 0, '', 'https://idc.panel.h2y.co/cart.php?a=add&pid=16', '￥1299', '', 1512637883, 1521161823, NULL, 'MineCloud HK Pacnet C2', 'https://idc.panel.h2y.co/cart.php?a=add&pid=16', 'if(strpos($str,\"缺貨中\")>=0){\nreturn false;\n}\nreturn true;', 1, '', ''),
+(9, 3, 3, '2GB', '40GB', 2, 1, 0, 'KVM', '2000G', 1000, 0, 'CN2 GIA', 'https://bwh1.net/aff.php?aff=5745&pid=70', '$10.58', '', 1521206330, 1521461288, NULL, 'Basic VPS BETA CN2 GIA', 'https://bwh1.net/aff.php?aff=5745&pid=70', 'if(strpos($str,\"Out of Stock\")>=0){\n    return 0;\n}\nreturn 1;', 1, '', ''),
+(10, 3, 3, '512M', '10G', 1, 1, 1, 'KVM', '1000G', 1000, 0, '', 'https://bwh1.net/aff.php?aff=5745&pid=53', '$2.99', '$19.99', 1521206651, 1521260990, NULL, 'SPECIAL 10G KVM PROMO V3', 'https://bwh1.net/aff.php?aff=5745&pid=53', 'if(strpos($str,\"Out of Stock\")>=0){\n    return false;\n}\nreturn true;', 1, '', ''),
+(11, 4, 4, '512MB', '20G', 1, 1, 0, 'KVM', '1000GB', 1000, 0, 'LAX SKVM - 01', 'https://www.dgchost.net/client/aff.php?aff=599&pid=80', '$3', '', 1521262192, 1521272230, NULL, 'LAX SKVM - 01', 'https://www.dgchost.net/client/cart.php?a=add&pid=80', 'if(strpos($str,\"Out of Stock\")>=0){\n    return 0;\n}\nreturn 1;', 1, '', ''),
+(12, 4, 4, '1G', '30G', 1, 1, 0, 'KVM', '2000G', 1000, 0, 'LAX SKVM - 02', 'https://www.dgchost.net/client/aff.php?aff=599&pid=81', '$5', '', 1521265528, 1521272284, NULL, 'LAX SKVM - 02', 'https://www.dgchost.net/client/cart.php?a=add&pid=81', 'if(strpos($str,\"Out of Stock\")>=0){\n    return 0;\n}\nreturn 1;', 1, '', ''),
+(13, 4, 4, '2G', '40G', 1, 1, 0, 'KVM', '3000G', 1000, 0, 'LAX SKVM - 03', 'https://www.dgchost.net/client/aff.php?aff=599&pid=82', '$10', '', 1521265654, 1521272286, NULL, 'LAX SKVM - 03', 'https://www.dgchost.net/client/cart.php?a=add&pid=82', 'if(strpos($str,\"Out of Stock\")>=0){\n    return false;\n}\nreturn true;\n                        ', 1, '', ''),
+(14, 4, 4, '512M', '10G', 1, 1, 0, 'KVM', '300G', 1000, 0, 'LAX CRKVM - SP01', 'https://www.dgchost.net/client/aff.php?aff=599&pid=84', '$1.66', '', 1521265849, 1521272230, NULL, 'LAX CRKVM - SP01', 'https://www.dgchost.net/client/cart.php?a=add&pid=84', 'if(strpos($str,\"Out of Stock\")>=0){\n    return 0;\n}\nreturn 1;', 1, '', ''),
+(15, 4, 4, '512M', '10G', 1, 1, 0, 'KVM', '500G', 1000, 0, 'LAX CRKVM - SP02', 'https://www.dgchost.net/client/aff.php?aff=599&pid=89', '$3.5', '', 1521266663, 1521272346, NULL, 'LAX CRKVM - SP02', 'https://www.dgchost.net/client/cart.php?a=add&pid=89', 'if(strpos($str,\"Out of Stock\")>=0){\n    return 0;\n}\nreturn 1;', 1, '', ''),
+(16, 4, 4, '512M', '20G', 1, 1, 0, 'KVM', '1000G', 1000, 0, 'LAX CRKVM - 01', 'https://www.dgchost.net/client/aff.php?aff=599&pid=58', '$7', '', 1521266809, 1521461342, NULL, 'LAX CRKVM - 01', 'https://www.dgchost.net/client/cart.php?a=add&pid=58', 'if(strpos($str,\"Out of Stock\")>=0){\n    return 0;\n}\nreturn 1;', 1, '', ''),
+(17, 4, 5, '512M', '20G', 1, 1, 1, 'KVM', '1000G', 30, 0, 'HK CRKVM 香港直连', 'https://www.dgchost.net/client/aff.php?aff=599&pid=85', '$5', '', 1521267029, 1521290202, NULL, 'HK CRKVM - 02', 'https://www.dgchost.net/client/cart.php?a=add&pid=85', 'if(strpos($str,\"Out of Stock\")>=0){\n    return 0;\n}\nreturn 1;', 1, '', ''),
+(18, 4, 5, '1G', '30G', 1, 1, 1, 'KVM', '2000G', 30, 0, 'HK CRKVM - 香港直连', 'https://www.dgchost.net/client/aff.php?aff=599&pid=86', '$10', '', 1521267282, 1521267311, NULL, 'HK CRKVM - 05', 'https://www.dgchost.net/client/cart.php?a=add&pid=86', 'if(strpos($str,\"Out of Stock\")>=0){\n    return 0;\n}\nreturn 1;', 1, '', ''),
+(19, 5, 6, '512M', '4G', 1, 1, 0, 'KVM', '600G OUT', 300, 0, 'Korea-KVM-Special', 'https://my.lightvm.com/cart.php?a=add&pid=22', '￥49', '', 1521382370, 1521436802, NULL, 'Korea-KVM-Special', 'https://my.lightvm.com/cart.php?a=add&pid=22', 'if(strpos($str,\"缺貨中\")>=0){\n    return 0;\n}\nreturn 1;', 1, 'KINX', '');
 
 -- --------------------------------------------------------
 
@@ -303,11 +317,35 @@ INSERT INTO `xm_log` (`id`, `indexid`, `status`, `create_time`, `update_time`, `
 (190, 4, 0, 1521161513, 1521161513, NULL),
 (191, 5, 0, 1521161642, 1521161642, NULL),
 (192, 6, 0, 1521161823, 1521161823, NULL),
-(193, 6, 1, 1521373658, 1521373658, NULL),
-(194, 6, 1, 1521373776, 1521373776, NULL),
-(195, 6, 1, 1521373947, 1521373947, NULL),
-(196, 6, 1, 1521373987, 1521373987, NULL),
-(197, 6, 1, 1521375054, 1521375054, NULL);
+(193, 9, 0, 1521260915, 1521260915, NULL),
+(194, 10, 0, 1521260942, 1521260942, NULL),
+(195, 9, 0, 1521260982, 1521260982, NULL),
+(196, 10, 0, 1521260990, 1521260990, NULL),
+(197, 9, 0, 1521261025, 1521261025, NULL),
+(198, 11, 0, 1521262203, 1521262203, NULL),
+(199, 12, 0, 1521265564, 1521265564, NULL),
+(200, 13, 0, 1521265685, 1521265685, NULL),
+(201, 14, 0, 1521265866, 1521265866, NULL),
+(202, 15, 0, 1521266708, 1521266708, NULL),
+(203, 17, 0, 1521267070, 1521267070, NULL),
+(204, 18, 0, 1521267311, 1521267311, NULL),
+(205, 11, 1, 1521271762, 1521271762, NULL),
+(206, 12, 1, 1521271837, 1521271837, NULL),
+(207, 13, 1, 1521271922, 1521271922, NULL),
+(208, 13, 1, 1521271979, 1521271979, NULL),
+(209, 14, 1, 1521271988, 1521271988, NULL),
+(210, 15, 1, 1521272122, 1521272122, NULL),
+(211, 15, 1, 1521272155, 1521272155, NULL),
+(212, 14, 0, 1521272230, 1521272230, NULL),
+(213, 11, 0, 1521272230, 1521272230, NULL),
+(214, 12, 0, 1521272284, 1521272284, NULL),
+(215, 15, 0, 1521272346, 1521272346, NULL),
+(216, 17, 1, 1521290148, 1521290148, NULL),
+(217, 17, 0, 1521290202, 1521290202, NULL),
+(218, 9, 1, 1521436269, 1521436269, NULL),
+(219, 19, 0, 1521436802, 1521436802, NULL),
+(220, 9, 0, 1521461288, 1521461288, NULL),
+(221, 16, 0, 1521461342, 1521461342, NULL);
 
 -- --------------------------------------------------------
 
@@ -329,7 +367,11 @@ CREATE TABLE `xm_place` (
 
 INSERT INTO `xm_place` (`id`, `name`, `create_time`, `update_time`, `delete_time`) VALUES
 (1, 'HK Pacnet', 1512637883, 1512637883, NULL),
-(2, 'china', 1521160775, 1521160775, NULL);
+(2, 'china', 1521160775, 1521160775, NULL),
+(3, '美国洛杉矶', 1521206330, 1521206330, NULL),
+(4, '洛杉矶LAX', 1521262192, 1521262192, NULL),
+(5, 'HongKong', 1521267029, 1521267029, NULL),
+(6, '韩国', 1521382370, 1521382370, NULL);
 
 -- --------------------------------------------------------
 
@@ -353,7 +395,8 @@ CREATE TABLE `xm_user` (
 --
 
 INSERT INTO `xm_user` (`id`, `user`, `pass`, `ftsckey`, `subscribe`, `create_time`, `update_time`, `delete_time`) VALUES
-(1, '546669204', '97304531204ef7431330c20427d95481', 'SCU16540Te03d436ae52c339f82764f1022f0d1975aae4d3ff0335', ',4,5,3,6', 1521268713, 1521373746, NULL);
+(0, 'sooele', '1b199b8c77ccdf544e44975ed6677d90', 'SCU23355T8cd03c68521a4e3c4893f9f0ce16676d5aae64768d7ff', ',18,17,16,15,14,19,13,12,11,10,9,6,5,4,3,2,1', 1521454712, 1521478696, NULL),
+(1, 'sgwyhwt', 'e4b178109b208e2bcbae8603eba53dc4', 'SCU5797T0169e671db21b093dcc33bd504fcbb9f589c378899308', '10,9,15,14', 1521381593, 1521381669, NULL);
 
 --
 -- Indexes for dumped tables
@@ -397,31 +440,25 @@ ALTER TABLE `xm_user`
 -- 使用表AUTO_INCREMENT `xm_company`
 --
 ALTER TABLE `xm_company`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- 使用表AUTO_INCREMENT `xm_index`
 --
 ALTER TABLE `xm_index`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- 使用表AUTO_INCREMENT `xm_log`
 --
 ALTER TABLE `xm_log`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=198;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=222;
 
 --
 -- 使用表AUTO_INCREMENT `xm_place`
 --
 ALTER TABLE `xm_place`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- 使用表AUTO_INCREMENT `xm_user`
---
-ALTER TABLE `xm_user`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
