@@ -119,6 +119,9 @@ class Index extends Model{
                         go_curl("https://cloud.hcaiyue.top/tgbot.php","post", ["method"=>"send","content"=>$content,"sckey"=>$v["tgsckey"]]);
                     }
                 }
+                if (config("app.tgchannelsckey") != ""){
+                    go_curl("https://cloud.hcaiyue.top/tgbot.php","post", ["method"=>"send","content"=>$content,"sckey"=>config("app.tgchannelsckey")]);
+                }
 
             }
         }

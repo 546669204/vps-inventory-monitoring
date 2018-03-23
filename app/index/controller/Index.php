@@ -15,6 +15,8 @@ class Index extends Controller
         }else{
             $this->assign("islogin",false);
         }
+        
+        $this->assign("tgchannel",config("app.tgchannel"));
         return $this->fetch();
     }
     public function getlist(){
