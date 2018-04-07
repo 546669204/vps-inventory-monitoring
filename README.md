@@ -42,8 +42,31 @@ screen -r vpstest
 5.待更新
 
 ----
-
+## 函数说明
+ - $curl["Code"] 返回状态码  
+ - $curl["RequestHeader"] 请求头  
+ - $curl["ResponseHeader"] 返回头  
+ - $str 返回源代码
+ - $value["stock"] 原库存状态
+### 演示检测函数
+```
+if ($curl["Code"] != 200){ //首先判断状态码
+    return false;
+}
+if (strpos($str,"MineCloud")==false){ //检测是否正常打开有无公司名字之类关键词
+    return $value["stock"]; //返回原库存状态
+}
+if (strpos($str,"缺货中")!==false){ //检测是否含有缺货关键词
+    return false; 
+}
+return true;
+```
+---
 ## 更新日志
+
+2018-04-07  
+更新go_curl函数返回更多可用信息
+添加调试功能
 
 2018-03-23   
 更新Telegram推送支持 频道推送和私人定制推送  

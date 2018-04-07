@@ -32,6 +32,8 @@ function go_curl($url, $type, $data = false, &$err_msg = null, $timeout = 20, $c
     $option[CURLOPT_MAXREDIRS]      = 4;
     $option[CURLOPT_RETURNTRANSFER] = TRUE;
     $option[CURLOPT_TIMEOUT]        = $timeout;
+    $option[CURLINFO_HEADER_OUT] = TRUE;
+    $option[CURLOPT_HEADER] = TRUE;
     //设置证书信息
     if(!empty($cert_info) && !empty($cert_info['cert_file'])) {
         $option[CURLOPT_SSLCERT]       = $cert_info['cert_file'];
@@ -68,9 +70,14 @@ function go_curl($url, $type, $data = false, &$err_msg = null, $timeout = 20, $c
 
     $ch = curl_init();
     curl_setopt_array($ch, $option);
-    $response = curl_exec($ch);
+    $responsebody = curl_exec($ch);
     $curl_no  = curl_errno($ch);
     $curl_err = curl_error($ch);
+    $response = [];
+    $response["RequestHeader"] = curl_getinfo($ch,CURLINFO_HEADER_OUT);
+    $response["ResponseHeader"] = substr($responsebody,0,curl_getinfo($ch,CURLINFO_HEADER_SIZE));
+    $response["Body"] = substr($responsebody,curl_getinfo($ch,CURLINFO_HEADER_SIZE));
+    $response["Code"] =  curl_getinfo($ch,CURLINFO_HTTP_CODE);
     curl_close($ch);
     // error_log
     if($curl_no > 0) {

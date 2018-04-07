@@ -100,7 +100,11 @@ class Index extends Model{
         $request = request();
         $host = $request->domain();
         foreach ($list as $value){
-            $str = go_curl($value["vurl"],"get");
+            $curl = go_curl($value["vurl"],"get");
+            if (config("app.testdebug")){
+                file_put_contents(TEMP_PATH . "/debug.txt","------[START]------\n".date("Y-m-d h:i:s")."\n{$curl['RequestHeader']}\n\n{$curl['ResponseHeader']}\n{$curl['Body']}\n------[END]------",FILE_APPEND);
+            }
+            $str = $curl["Body"];
             $a = eval($value["vf"]);
             $r[] = "{$value['name']} --- " . (($a) ? 'true' : 'false');
             if ($a != $value["stock"]){
