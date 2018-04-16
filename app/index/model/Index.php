@@ -51,7 +51,8 @@ class Index extends Model{
 			$request["map"][join(Db::getTableInfo('xm_index', 'fields')," | ")] = ["LIKE","%" . $request["map"]["search"] . "%"];
 		}
 		unset($request["map"]["search"]);
-        $data = $this->order(array_merge($request["order"],["create_time"=>"desc"]))->where( $request['map'] )->limit($request['offset'], $request['limit'])->select();
+        //$data = $this->order(array_merge($request["order"],["create_time"=>"desc"]))->where( $request['map'] )->limit($request['offset'], $request['limit'])->select();
+        $data = $this->order(array_merge($request["order"],["create_time"=>"desc"]))->where( $request['map'] )->select();
         $company = Model("Company")->column("name","id");
         $place = Model("Place")->column("name","id");
         foreach($data as &$value){
@@ -59,9 +60,9 @@ class Index extends Model{
             $value["placename"]=$place[$value["placeid"]];
         }
 		$total=$this->where( $request['map'] )->count();
-        $returnarr= array("rows"=>$data,"total"=>$total);
+        //$returnarr= array("rows"=>$data,"total"=>$total);
         
-		return json($returnarr);
+		return json($data);
     }
     public function saveData($data){
         $company = Model("Company")->where(["name"=>$data["companyname"]])->find();

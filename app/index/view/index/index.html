@@ -44,7 +44,7 @@
 				</div>
                 <table id="table"
                     data-toolbar="#toolbar"
-                    data-search="false"
+                    data-search="true"
                     data-show-refresh="true"
                     data-show-toggle="true"
                     data-show-columns="true"
@@ -57,7 +57,7 @@
                     data-id-field="id"
                     data-page-list="[10, 25, 50, 100, ALL]"
                     data-show-footer="false"
-                    data-side-pagination="server"
+                    data-side-pagination="client"
                     data-url="{:url('index/index/getList?')}"
                     data-filter-control="true"
                     data-filter-show-clear="true"
@@ -158,7 +158,6 @@
 #table td{vertical-align:middle;text-align:center;}
 </style>
     <script>
-
         function bandwidth(value,row,index){
             return value + "M";
         }
@@ -217,7 +216,112 @@
         };
 
         $('#table').bootstrapTable({
-            
+            customSort:function(sortName, sortOrder){
+                var that = this,
+                name = sortName,
+                order = sortOrder === 'desc' ? -1 : 1,
+                index = $.inArray(sortName, this.header.fields);
+                if (index !== -1) {
+                    if (this.options.sortStable) {
+                        $.each(this.data, function (i, row) {
+                            if (!row.hasOwnProperty('_position')) row._position = i;
+                        });
+                    }
+                    var getItemField = function (item, field, escape) {
+                        var value = item;
+
+                        if (typeof field !== 'string' || item.hasOwnProperty(field)) {
+                            return escape ? escapeHTML(item[field]) : item[field];
+                        }
+                        var props = field.split('.');
+                        for (var p in props) {
+                            value = value && value[props[p]];
+                        }
+                        return escape ? escapeHTML(value) : value;
+                    };
+                    var calculateObjectValue = function (self, name, args, defaultValue) {
+                        var func = name;
+
+                        if (typeof name === 'string') {
+                            // support obj.func1.func2
+                            var names = name.split('.');
+
+                            if (names.length > 1) {
+                                func = window;
+                                $.each(names, function (i, f) {
+                                    func = func[f];
+                                });
+                            } else {
+                                func = window[name];
+                            }
+                        }
+                        if (typeof func === 'object') {
+                            return func;
+                        }
+                        if (typeof func === 'function') {
+                            return func.apply(self, args);
+                        }
+                        if (!func && typeof name === 'string' && sprintf.apply(this, [name].concat(args))) {
+                            return sprintf.apply(this, [name].concat(args));
+                        }
+                        return defaultValue;
+                    };
+                    this.data.sort(function (a, b) {
+
+                        if (that.header.sortNames[index]) {
+                            name = that.header.sortNames[index];
+                        }
+                        var aa = getItemField(a, name, that.options.escape),
+                            bb = getItemField(b, name, that.options.escape),
+                            value = calculateObjectValue(that.header, that.header.sorters[index], [aa, bb]);
+
+                        if (value !== undefined) {
+                            return order * value;
+                        }
+
+                        // Fix #161: undefined or null string sort bug.
+                        if (aa === undefined || aa === null) {
+                            aa = '';
+                        }
+                        if (bb === undefined || bb === null) {
+                            bb = '';
+                        }
+
+                        if (that.options.sortStable && aa === bb) {
+                            aa = a._position;
+                            bb = b._position;
+                        }
+
+                        // IF both values are numeric, do a numeric comparison
+                        if ($.isNumeric(aa) && $.isNumeric(bb) || $.inArray(name,["flow","bandwidth","disk"])>=0 ) {
+                            // Convert numerical values form string to float.
+                            aa = parseFloat(aa);
+                            bb = parseFloat(bb);
+                            if (aa < bb) {
+                                return order * -1;
+                            }
+                            return order;
+                        }
+                        
+                        if (aa === bb) {
+                            return 0;
+                        }
+
+                        // If value is not a string, convert to string
+                        if (typeof aa !== 'string') {
+                            aa = aa.toString();
+                        }
+
+                        if (aa.localeCompare(bb) === -1) {
+                            return order * -1;
+                        }
+
+                        return order;
+                    });
+                }
+                console.log(this.data);
+                return ;
+            }
         });
 
         function useredit(){
