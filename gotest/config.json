@@ -1,0 +1,14 @@
+{
+    "mysqlname":"vps",
+    "mysqluser":"",
+    "mysqlpass":"",
+    "mysqlhost":"127.0.0.1",
+    "mysqlport":3306,
+    "ThreadNumber":100,
+    "VerifyType":1,
+    "title":"您关注的{{.name}}有货啦。",
+    "content":"您关注的{{.name}}有货啦。\n快来大肆抢购呀。\n测评地址：$host/ceping/{{.id}}\n购买地址：$host/buy/{{.id}}",
+    "tgchannelsckey":"",
+    "tgboturl":"https://cloud.hcaiyue.top/tgbot.php",
+    "proxy":["local"]
+}
