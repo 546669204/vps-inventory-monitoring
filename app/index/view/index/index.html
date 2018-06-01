@@ -119,6 +119,13 @@
                     <input type="text" class="form-control" id="tgsckey" name="tgsckey" value="{$user.tgsckey??''}">
                     <p class="help-block">https://t.me/VpsStockBot 添加 获取 sckey</p>
                 </div>
+                {if condition="$iscaptcha and !isset($user.id)"}
+                <div class="form-group">
+                    <label for="tgsckey">验证码</label>
+                    <input type="text" class="form-control" id="captcha" name="captcha" value="">
+                    <div><img src="{:captcha_src()}" alt="captcha" /></div>
+                </div>
+                {/if}
                 </form>
             </div>
             <div class="modal-footer">
@@ -363,6 +370,10 @@
                 success:function(re){
                     if (re.status == 0){
                         alert("帐号已存在,请更改其他重试.")
+                        return ;
+                    }
+                    if (re.status == 0){
+                        alert("验证码错误")
                         return ;
                     }
                     window.location.reload();

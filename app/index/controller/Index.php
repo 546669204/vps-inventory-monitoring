@@ -1,7 +1,6 @@
 <?php
 namespace app\index\controller;
 use think\Controller;
-
 class Index extends Controller
 {
     public function index(){
@@ -17,6 +16,7 @@ class Index extends Controller
         }
         
         $this->assign("tgchannel",config("app.tgchannel"));
+        $this->assign("iscaptcha",config("app.captcha"));
         return $this->fetch();
     }
     public function getlist(){
@@ -64,6 +64,11 @@ class Index extends Controller
     }
     public function usersavedata(){
         $data = input('post.');
+        if(config("app.captcha")){
+            if(!captcha_check($data["captcha"])){
+                return json(["status"=>2]);
+            }
+        }
       	if(model('User')->saveData( $data )){
             return json(["status"=>1]);
         }else{
@@ -81,6 +86,5 @@ class Index extends Controller
         $data = input('post.');
         return model('User')->subscribe( $data );
     }
-
     
 }

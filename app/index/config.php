@@ -8,5 +8,6 @@ return [
         'tgchannel' => 'https://t.me/hcaiyuetop', //telegram 频道地址
         'tgchannelsckey' => 'be88R+lzU9AGKQphkZKCHdxOdkWF4S0ms9maNpmeEucqthboZyXNFNkyJA', // 邀请https://t.me/VpsStockBot进入频道 设置为管理员 然后在频道发送 /start 获取sckey 填入
         'testdebug' => false, //是否输出调试信息到文件
+        'captcha' => true,//启动验证码
     ],
 ];
