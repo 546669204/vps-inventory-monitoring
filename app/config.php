@@ -2,7 +2,7 @@
 // +----------------------------------------------------------------------
 // | ThinkPHP [ WE CAN DO IT JUST THINK ]
 // +----------------------------------------------------------------------
-// | Copyright (c) 2006~2016 http://thinkphp.cn All rights reserved.
+// | Copyright (c) 2006~2018 http://thinkphp.cn All rights reserved.
 // +----------------------------------------------------------------------
 // | Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )
 // +----------------------------------------------------------------------
@@ -14,8 +14,6 @@ return [
     // | 应用设置
     // +----------------------------------------------------------------------
 
-    // 应用命名空间
-    'app_namespace'          => 'app',
     // 应用调试模式
     'app_debug'              => false,
     // 应用Trace
@@ -238,21 +236,4 @@ return [
         'var_page'  => 'page',
         'list_rows' => 15,
     ],
-
-    'captcha'  => [
-        // 验证码字符集合
-        'codeSet'  => '2345678abcdefhijkmnpqrstuvwxyzABCDEFGHJKLMNPQRTUVWXY', 
-        // 验证码字体大小(px)
-        'fontSize' => 20, 
-        // 是否画混淆曲线
-        'useCurve' => true, 
-         // 验证码图片高度
-        'imageH'   => 00,
-        // 验证码图片宽度
-        'imageW'   => 0, 
-        // 验证码位数
-        'length'   => 4, 
-        // 验证成功后是否重置        
-        'reset'    => true
-	],
 ];

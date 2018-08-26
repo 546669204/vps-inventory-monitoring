@@ -393,7 +393,7 @@ CREATE TABLE `xm_user` (
 --
 
 INSERT INTO `xm_user` (`id`, `user`, `pass`, `ftsckey`, `tgsckey`, `subscribe`, `create_time`, `update_time`, `delete_time`) VALUES
-(1, '546669204', '97304531204ef7431330c20427d95481', '', '121feroh6SAph4eseXjUdmC9MqjpT+Zhf1w30OAgivZgoq/bJSg', ',19,18,17', 1521724322, 1521725459, NULL);
+(1, 'admin', '', '', '', ',19,18,17', 1521724322, 1521725459, NULL);
 
 --
 -- Indexes for dumped tables

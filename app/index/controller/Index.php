@@ -1,90 +1,10 @@
 <?php
 namespace app\index\controller;
-use think\Controller;
-class Index extends Controller
+
+class Index
 {
-    public function index(){
-        if (session('?user')){
-            $this->assign("islogin",true);
-            $data = session('user');
-            $u = Model("User")->where(["user"=>$data["user"]])->find();
-            if ($u != null){
-                $this->assign("user",$u);
-            }
-        }else{
-            $this->assign("islogin",false);
-        }
-        
-        $this->assign("tgchannel",config("app.tgchannel"));
-        $this->assign("iscaptcha",config("app.captcha"));
-        return $this->fetch();
+    public function index()
+    {
+        return '<style type="text/css">*{ padding: 0; margin: 0; } .think_default_text{ padding: 4px 48px;} a{color:#2E5CD5;cursor: pointer;text-decoration: none} a:hover{text-decoration:underline; } body{ background: #fff; font-family: "Century Gothic","Microsoft yahei"; color: #333;font-size:18px} h1{ font-size: 100px; font-weight: normal; margin-bottom: 12px; } p{ line-height: 1.6em; font-size: 42px }</style><div style="padding: 24px 48px;"> <h1>:)</h1><p> ThinkPHP V5<br/><span style="font-size:30px">十年磨一剑 - 为API开发设计的高性能框架</span></p><span style="font-size:22px;">[ V5.0 版本由 <a href="http://www.qiniu.com" target="qiniu">七牛云</a> 独家赞助发布 ]</span></div><script type="text/javascript" src="https://tajs.qq.com/stats?sId=9347272" charset="UTF-8"></script><script type="text/javascript" src="https://e.topthink.com/Public/static/client.js"></script><think id="ad_bd568ce7058a1091"></think>';
     }
-    public function getlist(){
-        $request = request()->param("");
-        return Model("Index")->getlist($request);
-    }
-    public function edit(){
-        if (config("app.addpass")){
-            if (session('?user')){
-                $user = session('user');
-                $a = explode(",",config("app.adduid"));
-                if (!in_array($user["id"],$a)){
-                    return $this->error("对不起您没有添加权限!,请联系管理员开通。");
-                }
-            }else{
-                return $this->error("对不起您没有添加权限!,请联系管理员开通。");
-            }
-        }
-        $this->assign("companyarr",str_replace(["\t"," "],"",join(Model("Company")->getcolumnname(),'","')));
-        $this->assign("placearr",str_replace(["\t"," "],"",join(Model("Place")->getcolumnname(),'","')));
-        
-        return $this->fetch();
-    }
-    public function savedata(){
-        if (config("app.addpass")){
-            if (session('?user')){
-                $user = session('user');
-                $a = explode(",",config("app.adduid"));
-                if (!in_array($user["id"],$a)){
-                    return $this->error("对不起您没有添加权限!,请联系管理员开通。");
-                }
-            }else{
-                return $this->error("对不起您没有添加权限!,请联系管理员开通。");
-            }
-        }
-        $data = input('post.');
-      	if(model('Index')->saveData( $data ) > 0){
-            return $this->success("添加成功",url("/"));
-        }else{
-            return $this->fail("添加失败",url("/"));
-        }
-    }
-    public function test(){
-        return Model("Index")->test();
-    }
-    public function usersavedata(){
-        $data = input('post.');
-        if(config("app.captcha")){
-            if(!captcha_check($data["captcha"])){
-                return json(["status"=>2]);
-            }
-        }
-      	if(model('User')->saveData( $data )){
-            return json(["status"=>1]);
-        }else{
-            return json(["status"=>0]);
-        }
-    }
-    public function login(){
-        $data = input('post.');
-        return model('User')->login( $data );
-    }
-    public function loginout(){
-        session('user', null);
-    }
-    public function subscribe(){
-        $data = input('post.');
-        return model('User')->subscribe( $data );
-    }
-    
 }
