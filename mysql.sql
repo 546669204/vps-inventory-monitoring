@@ -29,13 +29,14 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `xm_company` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `url` varchar(255) NOT NULL,
   `create_time` int(11) DEFAULT NULL,
   `update_time` int(11) DEFAULT NULL,
-  `delete_time` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `delete_time` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 --
 -- 转存表中的数据 `xm_company`
@@ -55,17 +56,17 @@ INSERT INTO `xm_company` (`id`, `name`, `url`, `create_time`, `update_time`, `de
 --
 
 CREATE TABLE `xm_index` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `companyid` int(10) UNSIGNED DEFAULT NULL,
-  `placeid` int(10) UNSIGNED DEFAULT NULL,
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `companyid` int(10) unsigned DEFAULT NULL,
+  `placeid` int(10) unsigned DEFAULT NULL,
   `ram` varchar(255) DEFAULT NULL,
   `disk` text,
-  `cpu` smallint(5) UNSIGNED DEFAULT NULL,
-  `ip4` smallint(5) UNSIGNED DEFAULT NULL,
-  `ip6` smallint(5) UNSIGNED DEFAULT NULL,
+  `cpu` smallint(5) unsigned DEFAULT NULL,
+  `ip4` smallint(5) unsigned DEFAULT NULL,
+  `ip6` smallint(5) unsigned DEFAULT NULL,
   `frame` varchar(25) DEFAULT NULL,
   `flow` varchar(150) DEFAULT NULL,
-  `bandwidth` smallint(5) UNSIGNED DEFAULT NULL,
+  `bandwidth` smallint(5) unsigned DEFAULT NULL,
   `stock` tinyint(1) DEFAULT '1',
   `remark` text,
   `buy` text,
@@ -77,10 +78,11 @@ CREATE TABLE `xm_index` (
   `name` varchar(255) NOT NULL,
   `vurl` varchar(255) NOT NULL,
   `vf` text NOT NULL,
-  `status` tinyint(3) UNSIGNED DEFAULT '0',
+  `status` tinyint(3) unsigned DEFAULT '0',
   `route` varchar(255) NOT NULL,
-  `ceping` varchar(1024) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `ceping` varchar(1024) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
 
 --
 -- 转存表中的数据 `xm_index`
@@ -106,13 +108,14 @@ INSERT INTO `xm_index` (`id`, `companyid`, `placeid`, `ram`, `disk`, `cpu`, `ip4
 --
 
 CREATE TABLE `xm_log` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `indexid` int(10) UNSIGNED DEFAULT '0',
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `indexid` int(10) unsigned DEFAULT '0',
   `status` tinyint(1) NOT NULL DEFAULT '0',
   `create_time` int(11) DEFAULT NULL,
   `update_time` int(11) DEFAULT NULL,
-  `delete_time` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `delete_time` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=249 DEFAULT CHARSET=utf8;
 
 --
 -- 转存表中的数据 `xm_log`
@@ -351,12 +354,13 @@ INSERT INTO `xm_log` (`id`, `indexid`, `status`, `create_time`, `update_time`, `
 --
 
 CREATE TABLE `xm_place` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `create_time` int(11) DEFAULT NULL,
   `update_time` int(11) DEFAULT NULL,
-  `delete_time` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `delete_time` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 --
 -- 转存表中的数据 `xm_place`
@@ -377,16 +381,17 @@ INSERT INTO `xm_place` (`id`, `name`, `create_time`, `update_time`, `delete_time
 --
 
 CREATE TABLE `xm_user` (
-  `id` int(10) UNSIGNED NOT NULL,
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `user` varchar(64) NOT NULL,
   `pass` varchar(32) NOT NULL,
   `ftsckey` varchar(256) DEFAULT '',
   `tgsckey` varchar(256) DEFAULT '',
-  `subscribe` text NOT NULL,
-  `create_time` int(10) UNSIGNED DEFAULT NULL,
-  `update_time` int(10) UNSIGNED DEFAULT NULL,
-  `delete_time` int(10) UNSIGNED DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `subscribe` text DEFAULT '',
+  `create_time` int(10) unsigned DEFAULT NULL,
+  `update_time` int(10) unsigned DEFAULT NULL,
+  `delete_time` int(10) unsigned DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 --
 -- 转存表中的数据 `xm_user`
