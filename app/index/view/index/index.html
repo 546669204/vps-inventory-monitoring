@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>vps库存监控</title>
+    <title>VPS库存监控</title>
     <script src="https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
     <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
@@ -16,7 +16,7 @@
 </head>
 <body>
 
-    
+
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-12 text-center">
@@ -24,7 +24,7 @@
 
                 <span>实时把握库存信息</span>{notempty name="tgchannel"}<a href="{$tgchannel}" target="_blank">Telegram 整站订阅 关注这里</a>{/notempty}
 
-               
+
             </div>
 
         </div>
@@ -72,8 +72,8 @@
                             <th data-width="50" data-field="ram" data-sortable="true">内存</th>
                             <th data-width="50" data-field="disk" data-sortable="true">硬盘</th>
                             <th data-width="50" data-field="cpu" data-sortable="true">CPU</th>
-                            <th data-width="50" data-field="ip4" data-sortable="true">IP4</th>
-                            <th data-width="50" data-field="ip6" data-sortable="true">IP6</th>
+                            <th data-width="50" data-field="ip4" data-sortable="true">IPv4</th>
+                            <th data-width="50" data-field="ip6" data-sortable="true">IPv6</th>
                             <th data-width="50" data-field="placename" data-filter-control="select">地理位置</th>
                             <th data-width="50" data-field="flow" data-sortable="true">流量</th>
                             <th data-width="50" data-field="bandwidth" data-sortable="true" data-formatter="bandwidth">带宽</th>
@@ -130,7 +130,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default btn-danger" data-dismiss="modal">取消</button>
-                <button type="button" class="btn btn-primary btn-success" onclick="usersavedata()">保存</button>
+                <button type="button" class="btn btn-primary btn-success" onclick="usersavedata()">注册</button>
             </div>
         </div>
     </div>
@@ -309,7 +309,7 @@
                             }
                             return order;
                         }
-                        
+
                         if (aa === bb) {
                             return 0;
                         }
@@ -369,36 +369,36 @@
                 dataType:"json",
                 success:function(re){
                     if (re.status == 0){
-                        alert("帐号已存在,请更改其他重试.")
+                        alert("帐号已存在,请更改其他重试。")
                         return ;
                     }
                     if (re.status == 2){
-                        alert("验证码错误")
+                        alert("验证码错误。")
                         return ;
                     }
                     window.location.reload();
                 }
             })
-            
+
         }
-		
+
 		$(document).ready(function(){
 			$("#table th").each(function(){
-				if ($(this).find(".fht-cell select").length>0){	
+				if ($(this).find(".fht-cell select").length>0){
 					$width = $(this).width();
 					$(this).find(".fht-cell select option").eq(0).html($(this).find(".th-inner").html());
 					$(this).find(".th-inner").remove();
 					$(this).css({verticalAlign:"top",paddingTop:"8px"});
 					//$(this).find("select").width($width);
 				}
-				if ($(this).find(".fht-cell input").length>0){	
+				if ($(this).find(".fht-cell input").length>0){
 					$width = $(this).width();
 					$(this).find(".fht-cell input").attr("placeholder",$(this).find(".th-inner").html());
 					$(this).find(".th-inner").remove();
 					$(this).css({verticalAlign:"top",paddingTop:"8px"});
 					//$(this).find("input").width($width);
 				}
-				if ($(this).find(".fht-cell>div").length>0 && $(this).find(".fht-cell>div").html() == ""){	
+				if ($(this).find(".fht-cell>div").length>0 && $(this).find(".fht-cell>div").html() == ""){
 					$(this).find(".fht-cell").remove();
 				}
 			});
