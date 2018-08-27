@@ -10,7 +10,7 @@
 
 1.创建数据库导入数据库文件mysql.sql
 
-2.修改数据库配置文件 vps-inventory-monitoring/app/database.example.php  
+2.修改数据库配置文件 vps-inventory-monitoring/app/database.example.php [需要重命名为database.php]
 
 3.配置Web服务器运行目录 vps-inventory-monitoring/public  
 
@@ -63,7 +63,8 @@ return true;
 ```
 ---
 ## 更新日志
-
+2018-08-27
+更新thinkphp内核版本为5.0.20优化php7执行效率 感谢[@Blake-Bill](https://github.com/Blake-Bill)
 2018-06-01
 增加注册验证码
 增加多线程监测 更快的速度
