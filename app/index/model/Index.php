@@ -49,7 +49,8 @@ class Index extends Model{
         $request = $this->fmtRequest( $request );
         if (isset($request["map"]["search"])){
 			$request["map"][join(Db::getTableInfo('xm_index', 'fields')," | ")] = ["LIKE","%" . $request["map"]["search"] . "%"];
-		}
+        }
+        $request["map"]["status"] = 1;
 		unset($request["map"]["search"]);
         //$data = $this->order(array_merge($request["order"],["create_time"=>"desc"]))->where( $request['map'] )->limit($request['offset'], $request['limit'])->select();
         $data = $this->order(array_merge($request["order"],["create_time"=>"desc"]))->where( $request['map'] )->select();
