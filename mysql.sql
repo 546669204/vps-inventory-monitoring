@@ -31,7 +31,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `xm_company` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
-  `url` varchar(255) NOT NULL,
+  `url` varchar(255) DEFAULT NULL,
   `create_time` int(11) DEFAULT NULL,
   `update_time` int(11) DEFAULT NULL,
   `delete_time` int(11) DEFAULT NULL,
@@ -66,7 +66,7 @@ CREATE TABLE `xm_index` (
   `ip6` smallint(5) unsigned DEFAULT NULL,
   `frame` varchar(25) DEFAULT NULL,
   `flow` varchar(150) DEFAULT NULL,
-  `bandwidth` smallint(5) unsigned DEFAULT NULL,
+  `bandwidth` varchar(25) unsigned DEFAULT NULL,
   `stock` tinyint(1) DEFAULT '1',
   `remark` text,
   `buy` text,
