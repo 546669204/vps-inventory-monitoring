@@ -8,7 +8,7 @@
 
 ## 安装指南
 
-1.创建数据库导入数据库文件mysql.sql
+1.创建数据库导入数据库文件mysql.sql 
 
 2.修改数据库配置文件 vps-inventory-monitoring/app/database.example.php [需要重命名为database.php]
 
@@ -16,7 +16,7 @@
 
 4.修改系统配置 app/index/config.php 定时时间 域名 等  
 
-5.SSH 进入网站目录 运行 `php think VpsTest ` 系统开始自动验证 
+5.SSH 进入网站目录 运行 `php think VpsTest ` 系统开始自动验证
 
 6.访问即可查看结果
 
@@ -30,7 +30,7 @@
 
 3.添加权限管理         ==> app/index/config.php    
 
-4.设置后台运行验证程序  ==> 
+4.设置后台运行验证程序  ==>
 >screen -S vpstest  //创建screen  
 cd [网站根目录]  
 php think VpsTest  
@@ -57,7 +57,7 @@ if (strpos($str,"MineCloud")==false){ //检测是否正常打开有无公司名�
     return $value["stock"]; //返回原库存状态
 }
 if (strpos($str,"缺货中")!==false){ //检测是否含有缺货关键词
-    return false; 
+    return false;
 }
 return true;
 ```

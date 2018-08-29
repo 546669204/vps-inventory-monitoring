@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>vps库存监控</title>
+    <title>VPS库存监控</title>
     <script src="https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
     <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
@@ -20,15 +20,15 @@
             <div class="col-sm-12">
                 <form class="form-horizontal" method="post" action="{:url('index/index/savedata?')}">
                     <div class="form-group">
-                        <label  class="col-sm-2 control-label">套餐名</label>
-                        <div class="col-sm-10">
-                        <input type="text" class="form-control typeahead"  name="name">
-                        </div>
-                    </div>
-                    <div class="form-group">
                         <label  class="col-sm-2 control-label">服务商</label>
                         <div class="col-sm-10">
                         <input type="text" class="form-control typeahead company" data-provide="typeahead" name="companyname">
+                        </div>
+                    </div>
+                   <div class="form-group">
+                        <label  class="col-sm-2 control-label">套餐名</label>
+                        <div class="col-sm-10">
+                        <input type="text" class="form-control typeahead"  name="name">
                         </div>
                     </div>
                     <div class="form-group">
@@ -56,27 +56,27 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label  class="col-sm-2 control-label">cpu</label>
+                        <label  class="col-sm-2 control-label">CPU</label>
                         <div class="col-sm-10">
-                        <input type="text" class="form-control" placeholder="cpu核心数" name="cpu">
+                        <input type="text" class="form-control" placeholder="CPU核心数" name="cpu">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label  class="col-sm-2 control-label">ip4</label>
+                        <label  class="col-sm-2 control-label">IPv4</label>
                         <div class="col-sm-10">
-                        <input type="text" class="form-control" placeholder="ip4数量" name="ip4">
+                        <input type="text" class="form-control" placeholder="IPv4数量" name="ip4">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label  class="col-sm-2 control-label">ip6</label>
+                        <label  class="col-sm-2 control-label">IPv6</label>
                         <div class="col-sm-10">
-                        <input type="text" class="form-control" placeholder="ip6数量" name="ip6">
+                        <input type="text" class="form-control" placeholder="IPv6数量" name="ip6">
                         </div>
                     </div>
                     <div class="form-group">
                         <label  class="col-sm-2 control-label">虚拟化</label>
                         <div class="col-sm-10">
-                        <input type="text" class="form-control" placeholder="虚拟化技术类型" name="frame">
+                        <input type="text" class="form-control" placeholder="虚拟化技术类型，例如：OpenVZ、KVM、Xen等" name="frame">
                         </div>
                     </div>
                     <div class="form-group">
@@ -88,7 +88,7 @@
                     <div class="form-group">
                         <label  class="col-sm-2 control-label">宽带</label>
                         <div class="col-sm-10">
-                        <input type="text" class="form-control" placeholder="巅峰宽带M" name="bandwidth">
+                        <input type="text" class="form-control" placeholder="巅峰宽带M，例如：100，1000等，勿填写单位" name="bandwidth">
                         </div>
                     </div>
 
