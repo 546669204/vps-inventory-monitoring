@@ -66,7 +66,7 @@ CREATE TABLE `xm_index` (
   `ip6` smallint(5) unsigned DEFAULT NULL,
   `frame` varchar(25) DEFAULT NULL,
   `flow` varchar(150) DEFAULT NULL,
-  `bandwidth` varchar(25) unsigned DEFAULT NULL,
+  `bandwidth` varchar(25) DEFAULT NULL,
   `stock` tinyint(1) DEFAULT '1',
   `remark` text,
   `buy` text,
