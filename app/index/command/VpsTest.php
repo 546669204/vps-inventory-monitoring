@@ -25,7 +25,7 @@ class VpsTest extends Command{
         while (1) {
             $output->writeln(date("Y-m-d h:i:s"));
             //$list = $index->where(["status"=>1])->select();
-            $list =  $index->alias('a')->join('xm_company c',"c.id = a.companyid" )->field("*,c.name as companyname,c.url as companyurl")->where(["status"=>1])->select();
+            $list =  $index->alias('a')->join('xm_company c',"c.id = a.companyid" )->field("a.*,c.name as companyname,c.url as companyurl")->where(["status"=>1])->select();
             $r = [];
             $host = config("app.host");
             foreach ($list as $value){
