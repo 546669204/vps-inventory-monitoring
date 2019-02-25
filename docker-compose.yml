@@ -1,0 +1,44 @@
+version: '2.2'
+
+services:
+  delos:
+    container_name: vps-nginx
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile-nginx
+    links:
+      - php
+    depends_on:
+      - mysql
+      - php
+    ports:
+      - "7780:80"  # expose 38080
+
+  php:
+    container_name: vps-php
+    #image: php:7.2-fpm
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile-php
+    volumes:
+      - ".:/var/www/html"
+    environment:
+      - MYSQL_URL=vps-mysql # links will maintain /etc/hosts, just use 'container_name'
+      - MYSQL_PORT=3306
+      - MYSQL_USERNAME=root
+      - MYSQL_PASSWD=
+      - MYSQL_SCHEMA=vps
+    links: 
+      - mysql
+  mysql:
+    container_name: vps-mysql
+    image: mysql:5.7.22
+    volumes:
+      - "./docker/mysql/volume:/var/lib/mysql"
+      - ./docker/mysql/init:/docker-entrypoint-initdb.d/
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci --init-connect='SET NAMES utf8mb4;' --innodb-flush-log-at-trx-commit=0 --innodb-use-native-aio=0
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "true"
+      MYSQL_DATABASE: "vps"
+      MYSQL_USER: "root"
+      MYSQL_PASSWORD: ""

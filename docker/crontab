@@ -1,0 +1,1 @@
+10 * * * * www php think VpsTest >> /var/log/cron.log 2>&1

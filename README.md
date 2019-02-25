@@ -20,6 +20,20 @@
 
 6.访问即可查看结果
 
+## Docker 
+
+1.安装docker  
+2.git clone https://github.com/546669204/vps-inventory-monitoring.git  
+3.cd vps-inventory-monitoring  
+4.docker-compose up -d  
+5.访问 :7780
+
+
+如有问题 请尝试
+>docker-compose down  
+docker-compose build  
+docker-compose up -d 
+
 -----
 
 ## 常见问题
@@ -63,6 +77,9 @@ return true;
 ```
 ---
 ## 更新日志
+2019-02-25  
+新增docker安装方式
+
 2018-08-27  
 更新thinkphp内核版本为5.0.20优化php7执行效率 感谢[@Blake-Bill](https://github.com/Blake-Bill)  
 
