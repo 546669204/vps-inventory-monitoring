@@ -9,8 +9,8 @@ services:
     links:
       - php
     depends_on:
-      - mysql
       - php
+      - mysql
     ports:
       - "7780:80"  # expose 38080
 
@@ -20,6 +20,7 @@ services:
     build:
       context: .
       dockerfile: ./docker/Dockerfile-php
+    command: php /var/www/html/think VpsTest
     volumes:
       - ".:/var/www/html"
     environment:
