@@ -24,7 +24,8 @@ class VpsTest extends Command{
         $user = new User;
         while (1) {
             $output->writeln(date("Y-m-d h:i:s"));
-            $list = $index->where(["status"=>1])->select();
+            //$list = $index->where(["status"=>1])->select();
+            $list =  $index->alias('a')->join('xm_company c',"c.id = a.companyid" )->field("a.*,c.name as companyname,c.url as companyurl")->where(["status"=>1])->select();
             $r = [];
             $host = config("app.host");
             foreach ($list as $value){
@@ -36,8 +37,9 @@ class VpsTest extends Command{
                 $a = eval($value["vf"]);
                 $r[] = "{$value['name']} --- " . (($a) ? 'true' : 'false');
                 if ($a != $value["stock"]){
-                    $index->save(["stock"=>$a],["id"=>$value["id"]]);
-                    $log->data(["status"=>$a,"indexid"=>$value["id"]])->isUpdate(false)->save();
+                    Index::where("id",$value["id"])->update(["stock"=>$a]); //save(["stock"=>$a],["id"=>$value["id"]]);
+                    Log::where("indexid",$value["id"])->update(["status"=>$a]);
+                    //$log->data(["status"=>$a,"indexid"=>$value["id"]])->isUpdate(false)->save();
                 }
                 if ($value["stock"] == false && $a == true){
                     $p = $user->where("find_in_set({$value['id']},subscribe)")->select();
