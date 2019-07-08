@@ -67,6 +67,9 @@ function go_curl($url, $type, $data = false, &$err_msg = null, $timeout = 20, $c
         }
         $option[CURLOPT_COOKIEJAR]   = "recookie.txt";
     }
+    
+    //user-agent
+    $option[CURLOPT_USERAGENT]   = 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.13) Gecko/20080311 Firefox/2.0.0.13';
 
     $ch = curl_init();
     curl_setopt_array($ch, $option);
